@@ -150,6 +150,14 @@ class OverrideSettingsDesign(
             )
 
             editableText(
+                value = configuration::externalControllerTLS,
+                adapter = NullableTextAdapter.String,
+                title = R.string.external_controller_tls,
+                placeholder = R.string.dont_modify,
+                empty = R.string.default_
+            )
+
+            editableText(
                 value = configuration::secret,
                 adapter = NullableTextAdapter.String,
                 title = R.string.secret,
@@ -322,6 +330,22 @@ class OverrideSettingsDesign(
                 adapter = TextAdapter.String,
                 title = R.string.fakeip_filter,
                 placeholder = R.string.dont_modify,
+                configure = dnsDependencies::add,
+            )
+
+            selectableList(
+                value = configuration.dns::fakeIPFilterMode,
+                values = arrayOf(
+                    null,
+                    ConfigurationOverride.FilterMode.BlackList,
+                    ConfigurationOverride.FilterMode.WhiteList
+                ),
+                valuesText = arrayOf(
+                    R.string.dont_modify,
+                    R.string.blacklist,
+                    R.string.whitelist
+                ),
+                title = R.string.fakeip_filter_mode,
                 configure = dnsDependencies::add,
             )
 
